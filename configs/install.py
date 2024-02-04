@@ -23,58 +23,54 @@ def create_virtualenv(dest, python="python.exe", venv="venv"):
     subprocess.check_call(cmd)
 
 def create_setup_file(directory_requirements): 
+    def display_dependency_paths(requirements_path):
+        module_paths = []
+        with open(requirements_path, 'r', encoding='utf-16') as file:
+            requirements = [line.strip() for line in file if line.strip()]
+        for requirement in requirements:
+            try:
+                if requirement.startswith("-e "):
+                    path = requirement[3:].strip()
+                    print(f"Editable Path from requirement files: {path}")
+                    module_paths.append(path)
+                else:
+                    distribution = pkg_resources.get_distribution(requirement)
+                    print(f"{distribution.project_name} ({distribution.version}): {distribution.location}")
+            except pkg_resources.DistributionNotFound as e:
+                print(f"Package not found: {e.req}")
+        return module_paths
+     
+    def evaluate_variables_environnement(env_pah_module):
+        # Recherche de motifs "${...}" dans le env_pah_module
+        bg = 0
+        while True:
+            prefix_var = env_pah_module.find('${', bg)
+            suffix_var = env_pah_module.find('}', prefix_var)
+            
+            if prefix_var == -1 or suffix_var == -1:
+                break
+            env_path = env_pah_module[prefix_var + 2:suffix_var]  
+            valeur_variable = os.environ.get(env_path) 
+            env_pah_module = env_pah_module[:prefix_var] + valeur_variable + env_pah_module[suffix_var + 1:]
+            bg = suffix_var + 1
+
+        return env_pah_module
+
     module_paths = display_dependency_paths(directory_requirements)
-    
     for path_env_module in module_paths: 
         # Évaluer les variables d'environnement dans le env_pah_module
         path_env_module = evaluate_variables_environnement(path_env_module)
         path_module = os.path.join(path_env_module.replace("/", "\\"))
         path_module = path_module.replace("[ui]", "")
         print(f"Module path: {path_module}")
-        
         if not os.path.exists(path_module):
             print(f"The directory {path_module} does not exist.")
-            return
-        
+            return 
         original_dir = os.getcwd()
         os.chdir(path_module)
         print(f"Current directory: {os.getcwd()}")
         subprocess.run('poetry2setup > setup.py', shell=True, check=True)
         os.chdir(original_dir)
-
-def evaluate_variables_environnement(env_pah_module):
-    # Recherche de motifs "${...}" dans le env_pah_module
-    bg = 0
-    while True:
-        prefix_var = env_pah_module.find('${', bg)
-        suffix_var = env_pah_module.find('}', prefix_var)
-        
-        if prefix_var == -1 or suffix_var == -1:
-            break
-        env_path = env_pah_module[prefix_var + 2:suffix_var]  
-        valeur_variable = os.environ.get(env_path) 
-        env_pah_module = env_pah_module[:prefix_var] + valeur_variable + env_pah_module[suffix_var + 1:]
-        bg = suffix_var + 1
-
-    return env_pah_module
-
-def display_dependency_paths(requirements_path):
-    module_paths = []
-    with open(requirements_path, 'r', encoding='utf-16') as file:
-        requirements = [line.strip() for line in file if line.strip()]
-    for requirement in requirements:
-        try:
-            if requirement.startswith("-e "):
-                path = requirement[3:].strip()
-                print(f"Editable Path from requirement files: {path}")
-                module_paths.append(path)
-            else:
-                distribution = pkg_resources.get_distribution(requirement)
-                print(f"{distribution.project_name} ({distribution.version}): {distribution.location}")
-        except pkg_resources.DistributionNotFound as e:
-            print(f"Package not found: {e.req}")
-
-    return module_paths
 
 # Function to check if a specific Python module is installed
 def check_module(module, python="python"):
