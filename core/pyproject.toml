@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "core"
+version = "0.1.00"
+description = "Pipeline Core Module"
+authors = ["Meddy Boukhedouma <meddy.boukhedouma@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=2.7,<3.0.0 || >=3.7.0,<3.10"
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "setuptools>=44.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.extras]
+ui = ["PySide2"]
+
+[tool.poetry.scripts]
+flow = "core.__main__:main"
