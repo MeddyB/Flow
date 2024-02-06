@@ -3,7 +3,6 @@ import sys
 import subprocess
 import logging
 import pkg_resources
-import re
 
 DIR = os.path.dirname(os.path.abspath(__file__))
 
