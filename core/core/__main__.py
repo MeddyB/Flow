@@ -38,7 +38,8 @@ def main():
     args = parser.parse_args()
     if args.action is None:
         #Launch Application 'Flow' by default
-        print("Lauch Flow {}".format())
+        import jeanpaulstart  
+        print("Launch Flow UI Application")
         
     if args.action == "context":
         if args.context_action == "create":

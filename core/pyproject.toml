@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "core"
-version = "0.1.00"
+version = "0.01.00"
 description = "Pipeline Core Module"
 authors = ["Meddy Boukhedouma <meddy.boukhedouma@gmail.com>"]
 
