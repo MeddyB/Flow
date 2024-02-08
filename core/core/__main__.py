@@ -1,5 +1,6 @@
 import argparse
 import os
+import getpass
 
 def main():
     parser = argparse.ArgumentParser()
@@ -38,8 +39,36 @@ def main():
     args = parser.parse_args()
     if args.action is None:
         #Launch Application 'Flow' by default
-        import jeanpaulstart  
+        from Qt5 import QtWidgets, QtCore, QtGui
+        from jeanpaulstartui.launcher import Launcher
         print("Launch Flow UI Application")
+        
+        app = QtWidgets.QApplication([])
+        batches = [os.path.join(os.environ["FLOW_CONFIG_LOCATION"], "softwares")]
+        if os.environ.get("FLOW_TAG_LOCATION") is not None:
+            tags = os.path.join(os.environ["FLOW_TAG_LOCATION"], "tags.yml")
+        else:
+            tags = os.path.join(os.environ["FLOW_CONFIG_LOCATION"], "tags/tags.yml")
+
+        launcher = Launcher()
+        launcher.batch_directories = batches
+        launcher.tags_filepath = tags
+        launcher.username = getpass.getuser()
+        launcher.version = "0.01.00"
+        launcher.update()
+        launcher._view.setWindowFlags(
+            # QtCore.Qt.CustomizeWindowHint |
+            QtCore.Qt.Dialog |
+            QtCore.Qt.WindowCloseButtonHint |
+            QtCore.Qt.WindowMinimizeButtonHint |
+            QtCore.Qt.WindowSystemMenuHint
+        )
+        launcher._view.setWindowTitle("Flow Pipeline - Hello Flow Dream !")
+        # launcher._view.window_icon = QtGui.QIcon(FLOW_ICON)
+        launcher._view.setWindowIcon(launcher._view.window_icon)
+        launcher._view.tray.setIcon(launcher._view.window_icon)
+        launcher.show()
+        app.exec_()
         
     if args.action == "context":
         if args.context_action == "create":
@@ -47,7 +76,7 @@ def main():
         elif args.context_action == "list":
             print("Context list :")
         elif args.context_action == "get":
-            print("Context get :")
+            print("Context get metadatas:")
                     
     elif args.action == "software": 
         if args.software_action == "list":

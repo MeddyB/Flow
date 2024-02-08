@@ -8,6 +8,8 @@ authors = ["Meddy Boukhedouma <meddy.boukhedouma@gmail.com>"]
 python = ">=2.7,<3.0.0 || >=3.7.0,<3.10"
 jeanpaulstart = {git = "https://github.com/Arubinu/jeanpaulstart.git", rev = "master"}
 jeanpaulstartui = {git = "https://github.com/Pixels-Coder/jeanpaulstartui.git", rev = "feature/python3_qt5"}
+"Qt5.py" = "^0.1.0"
+PySide2 = {version = "^5.15.2", optional = true }
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools>=44.0.0"]
