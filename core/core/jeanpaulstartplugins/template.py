@@ -1,0 +1,1 @@
+from jeanpaulstart.tasks.template import *
