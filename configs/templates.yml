@@ -1,0 +1,112 @@
+paths_mapping:
+  "P:/": "//srv-00-000/Prod/"
+  "P:\\": "//srv-00-000/Prod/"
+templates:
+  projects_dir: "${FLOW_PROJECTS_DIR}"
+  renders_projects_dir: "${FLOW_RENDERS_PROJECTS_DIR}"
+  project_root: "{@projects_dir}/{Project.name}"
+  asset_root: "{@project_root}/Library/{Asset.asset_type}/{Asset.asset_group}/{Asset.name}"
+  season_root: "{@project_root}/Season/{Season.name}"
+  episode_root: "{@season_root}/episodes/{Episode.name}"
+  sequence_root: "{@episode_root}/sequences/{Sequence.name}"
+  mastershot_root: "{@episode_root}/mastershots/{MasterShot.name}"
+  shot_root: "{@episode_root}/shots/{Shot.name}"
+
+  season_renders_storage: "{@renders_projects_dir}/Season/{Season.name}"
+  episode_renders_storage: "{@season_renders_storage}/episodes/{Episode.name}"
+  shot_renders_storage: "{@episode_renders_storage}/shots/{Shot.name}"
+
+  asset_work_root: "{@asset_root}/work/{Step.name}"
+  asset_work_scene: "{@asset_work_root}/{Asset.asset_type}_{Asset.name}_{Step.name}_v{Work.version:\\d\\d\\d}_{Work.description}.{File.extension}"
+  asset_work_texture: "{@asset_work_root}/textures"
+
+  asset_publish_root: "{@asset_root}/publish/{Step.name}"
+  asset_step_publish_version_root: "{@asset_publish_root}/v{Publish.version:\\d\\d\\d}"
+  asset_step_work_publish: "{@asset_step_publish_version_root}/work/{Asset.asset_type}_{Asset.name}_{Step.name}_v{Publish.version:\\d\\d\\d}.{File.extension}"
+  asset_step_extract_publish: "{@asset_step_publish_version_root}/{Asset.asset_type}_{Asset.name}_{Step.name}_{Representation.type}_v{Publish.version:\\d\\d\\d}.{File.extension}"
+  asset_step_thumbnail_publish: "{@asset_step_publish_version_root}/{Asset.asset_type}_{Asset.name}_{Asset.variation}_{Step.name}_thumbnail_v{Publish.version:\\d\\d\\d}.png"
+  asset_step_texture_publish: "{@asset_step_publish_version_root}/textures"
+
+  # Episode
+  episode_editing_clips_root: "{@episode_root}/editing/{Step.name}/{Season.name}_{Episode.name}_{Time.year}-{Time.month}-{Time.day}"
+  episode_editing_preview: "{@episode_editing_clips_root}/{Season.name}_{Episode.name}_{Sequence.name}_preview.{File.extension}"
+
+  # MasterShot
+  mastershot_work_root: "{@mastershot_root}/work/{Step.name}"
+  mastershot_work_scene: "{@mastershot_work_root}/{Season.name}_{Episode.name}_{MasterShot.name}_{Step.name}_v{Work.version:\\d\\d\\d}_{Work.description}.{File.extension}"
+
+  mastershot_publish_root: "{@mastershot_root}/publish/{Step.name}"
+  mastershot_step_publish_version_root: "{@mastershot_publish_root}/v{Publish.version:\\d\\d\\d}"
+  mastershot_step_work_publish: "{@mastershot_step_publish_version_root}/work/{Season.name}_{Episode.name}_{MasterShot.name}_{Step.name}_v{Publish.version:\\d\\d\\d}.{File.extension}"
+  mastershot_step_extract_publish: "{@mastershot_step_publish_version_root}/{Season.name}_{Episode.name}_{MasterShot.name}_{Step.name}_{Representation.type}_v{Publish.version:\\d\\d\\d}.{File.extension}"
+  mastershot_step_texture_publish: "{@mastershot_step_publish_version_root}/textures"
+  mastershot_shot_playblast_save: "{@mastershot_work_root}/review/{Season.name}_{Episode.name}_{Shot.name}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_v{Work.version:\\d\\d\\d}_{Work.take}_{Work.description}.{File.extension}"
+
+  # Shot
+  shot_work_root: "{@shot_root}/work/{Step.name}"
+  shot_work_scene: "{@shot_work_root}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_v{Work.version:\\d\\d\\d}_{Work.take}_{Work.description}.{File.extension}"
+  shot_publish_root: "{@shot_root}/publish/{Step.name}"
+  shot_step_publish_version_root: "{@shot_publish_root}/v{Publish.version:\\d\\d\\d}"
+  shot_step_work_publish: "{@shot_step_publish_version_root}/work/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_v{Publish.version:\\d\\d\\d}_{Publish.take}.{File.extension}"
+  shot_step_cache_work: "{@shot_work_root}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_{Representation.type}_{Asset.namespace}_v{Work.version:\\d\\d\\d}_{Work.take}.{File.extension}"
+  shot_step_extract_publish: "{@shot_step_publish_version_root}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_{Representation.type}_v{Publish.version:\\d\\d\\d}_{Publish.take}.{File.extension}"
+  shot_step_cache_extract_publish: "{@shot_step_publish_version_root}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_{Representation.type}_{Asset.namespace}_v{Publish.version:\\d\\d\\d}_{Publish.take}.{File.extension}"
+  shot_step_texture_publish: "{@shot_step_publish_version_root}/textures"
+  shot_playblast_img_sequence: "{@shot_work_root}/review/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_v{Work.version:\\d\\d\\d}_{Work.take}_{Work.description}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_v{Work.version:\\d\\d\\d}_{Work.take}_{Work.description}.{Frame.number:\\d\\d\\d\\d}.png"
+  shot_playblast_save: "{@shot_work_root}/review/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_v{Work.version:\\d\\d\\d}_{Work.take}_{Work.description}.{File.extension}"
+  shot_comp_render_half : "{@shot_step_publish_version_root}/half/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_half_v{Publish.version:\\d\\d\\d}_{Publish.take}_{Frame.number:\\d\\d\\d\\d}.{File.extension}"
+  shot_comp_render_hd : "{@shot_step_publish_version_root}/hd/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_hd_v{Publish.version:\\d\\d\\d}_{Publish.take}_{Frame.number:\\d\\d\\d\\d}.{File.extension}"
+  shot_comp_render_lowres : "{@shot_step_publish_version_root}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_lowres_v{Publish.version:\\d\\d\\d}_{Publish.take}.mp4"
+  shot_comp_render_highres : "{@shot_step_publish_version_root}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_highres_v{Publish.version:\\d\\d\\d}_{Publish.take}.mov"
+  shot_fx_publish_root : "{@shot_publish_root}/{Fx.name}"
+  shot_fx_publish_version_root : "{@shot_fx_publish_root}/v{Publish.version}"
+  shot_fx_publish_png : "{@shot_fx_publish_version_root}/png/{Fx.name}_{Step.name}_publish_v{Publish.version:\\d\\d\\d}_{Frame.number:\\d\\d\\d\\d}.png"
+  shot_fx_publish_preview : "{@shot_fx_publish_version_root}/{Fx.name}_{Step.name}_publish_v{Publish.version:\\d\\d\\d}.mp4"
+
+  # Sources
+  source: "{@project_root}/Source"
+  shot_audio_root: "{@shot_root}/source/audio"
+  shot_video_root: "{@shot_root}/source/video"
+  shot_audio_file: "{@shot_audio_root}/{Season.name}_{Episode.name}_{Shot.name}_v{Audio.version:\\d\\d\\d}.wav"
+  shot_video_file: "{@shot_video_root}/{Season.name}_{Episode.name}_{Shot.name}_v{Video.version:\\d\\d\\d}.{File.extension}"
+  shot_jpg_sequence: "{@shot_video_root}/{Season.name}_{Episode.name}_{Shot.name}_{Video.version}_jpg/{Season.name}_{Episode.name}_{Shot.name}_v{Video.version:\\d\\d\\d}_{Frame.number:\\d\\d\\d\\d}.{File.extension}"
+  
+  # Render Settings
+  rendersetup_root: "{@project_root}/Config/Maya/rendersetup"
+  rendersetup_preset: "{@rendersetup_root}/{Rendersettings.renderer}/{Rendersettings.renderer}_{Rendersettings.preset}.{File.extension}"
+  rendersettings_root: "{@project_root}/Config/Maya/rendersettings"
+  rendersettings_preset: "{@rendersettings_root}/{Rendersettings.renderer}/{Rendersettings.renderer}_{Rendersettings.preset}.{File.extension}"
+  aovs_root : "{@project_root}/Config/Maya/aovs"
+  aovs_preset: "{@aovs_root}/{Rendersettings.renderer}/{Rendersettings.renderer}_{Rendersettings.preset}.{File.extension}"
+  renderlayers_root : "{@project_root}/Config/Maya/renderlayers"
+  renderlayers_preset: "{@renderlayers_root}/{Rendersettings.renderer}/{Rendersettings.renderer}_{Rendersettings.preset}.{File.extension}"
+  rendermaterials_root : "{@project_root}/Config/Maya/rendermaterials"
+  rendermaterials_preset: "{@rendermaterials_root}/{Rendersettings.renderer}/{Rendersettings.renderer}_{Rendersettings.preset}.{File.extension}"
+  renderhotmask_root: "{@project_root}/Config/Maya/hostmask"
+  renderhotmask_preset: "{@renderhotmask_root}/{Renderer}/{Renderer}_{Preset}.{File.extension}"
+
+  color_management_preset: "{@project_root}/Config/color_management/OpenColorIO-Config-ACES-1.2/aces_1.2/HK_OCIO.xml"
+
+  shot_renders_root: "{@shot_renders_storage}/renders/{Step.name}"
+  shot_step_render_version_root: "{@shot_renders_root}/v{Render.version:\\d\\d\\d}"
+  shot_step_render_frames: "{@shot_step_render_version_root}/{Render.preset}/"
+  shot_step_render_scene: "{@shot_step_render_version_root}/{Render.preset}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_render_v{Render.version:\\d\\d\\d}.ma"
+  shot_render_imgsequence_root : "{@shot_step_render_version_root}/{Render.preset}/{Renderlayer.name}"
+  shot_render_imgsequence : "{@shot_render_imgsequence_root}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_render_v{Render.version:\\d\\d\\d}_{Renderlayer.name}_{Aov.name}.{Frame.number:\\d\\d\\d\\d}.png"
+  shot_render_imgsequence_maya : "{@shot_render_imgsequence_root}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_render_v{Render.version:\\d\\d\\d}_<Layer>"
+  shot_render_imgsequence_beauty : "{@shot_render_imgsequence_root}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_render_v{Render.version:\\d\\d\\d}_{Renderlayer.name}.{Frame.number:\\d\\d\\d\\d}.png"
+  shot_render_preview_beauty : "{@shot_step_render_version_root}/{Render.preset}/{Season.name}_{Episode.name}_{Shot.name}_{Step.name}_render_v{Render.version:\\d\\d\\d}.mp4"
+
+  # HUD presets
+  hud_presets_root: "{@project_root}/Config/Maya/hud"
+  hud_preset: "{@hud_presets_root}/{File.name}.{File.extension}"
+  camera_inferno_preset: "{@project_root}/Config/Maya/presets/attrPresets/dcCameraInferno/{File.name}.{File.extension}"
+
+  # Animation helpers
+  chr_collider : "{@project_root}/Config/Maya/rig/collider/collider_publish.ma"
+
+  # Maya config
+  maya_project_preferences: "{@project_root}/Config/Maya/startup/project_preferences"
+  maya_user_preferences: "{@project_root}/Config/Maya/startup/user_preferences"
+  maya_default_scene: "{@project_root}/Config/Maya/default_scene.ma"
+

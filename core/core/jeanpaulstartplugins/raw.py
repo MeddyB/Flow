@@ -16,6 +16,7 @@ def apply_(async_, command, open_terminal, capture_output):
     from subprocess import Popen, call, PIPE, STDOUT
     from jeanpaulstart.constants import OK
     import sys
+    
     # if no_shell:
     #     p = Popen(shlex.split(command), shell=True, stdout=PIPE, stderr=STDOUT)
     #     output = ""
@@ -43,6 +44,7 @@ def apply_(async_, command, open_terminal, capture_output):
     #     cmd = ["powershell", "-windowstyle", "hidden", "-Command", "&\"{}\"".format(executable)]
     #     if len(args):
     #         cmd += args
+    
     if async_:
         Popen(command, shell=False, close_fds=True)
         return OK

@@ -1,0 +1,27 @@
+---
+name: Maya 2020
+icon_path: "${FLOW_CONFIG_LOCATION}/resources/icons/maya2020.png"
+tags:
+  - Maya
+  - DCC
+  - 3D
+  - autodesk
+environment:
+  MAYA_VERSION: 2020
+  MAYA_LOCATION: "C:/Program Files/Autodesk/Maya${MAYA_VERSION}"
+  MAYA_VENV_LOCATION: "${FLOW_CONFIG_LOCATION}/venvs/maya2020"
+  MAYA_DISABLE_CIP: 1
+  MAYA_DISABLE_CLIC_IPM: 1
+  MAYA_DISABLE_CER: 1
+  FLEXLM_TIMEOUT: 3000000
+  MAYA_DISABLE_OPENCL: 1
+  FLOW_LOG_PATH : "~\\.flw\\<current_day>_maya.log"
+  MAYA_PRESET_PATH: "${FLOW_CURRENT_PROJECT}/Config/Maya/presets"
+  XBMLANGPATH: "${MAYA_COMPONENT_NODES_LOCATION}/icons"
+tasks:
+  - name: Launch Maya 2020
+    raw:
+      open_terminal: True
+      async: True
+      command: "\"${MAYA_LOCATION}/bin/maya.exe \""
+...

@@ -1,0 +1,23 @@
+---
+name: MayaPy 2020
+icon_path: "${FLOW_CONFIG_LOCATION}/resources/icons/mayapy.png"
+tags:
+  - mayaPy
+environment:
+  MAYA_VERSION: 2020
+  MAYA_LOCATION: "C:/Program Files/Autodesk/Maya${MAYA_VERSION}"
+  MAYA_VENV_LOCATION: "${FLOW_CONFIG_LOCATION}/venvs/maya2020"
+  MAYA_DISABLE_CIP: 1
+  MAYA_DISABLE_CLIC_IPM: 1
+  MAYA_DISABLE_CER: 1
+  FLEXLM_TIMEOUT: 3000000
+  MAYA_DISABLE_OPENCL: 1
+  XBMLANGPATH: "${MAYA_COMPONENT_NODES_LOCATION}/icons"
+tasks:
+  - name: Launch MayaPy 2020
+    raw:
+      open_terminal: False
+      async: False
+      capture_output: True
+      command: "\"${MAYA_LOCATION}/bin/mayapy.exe\" \"${FLOW_CONFIG_LOCATION}/resources/maya/mayapy_initialize.py\""
+...

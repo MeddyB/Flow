@@ -1,0 +1,8 @@
+name: PowerShell
+icon_path: "${FLOW_CONFIG_LOCATION}/resources/icons/PowerShell.png"
+tags:
+- DCC
+tasks:
+- name: Launch PowerShell
+  raw:
+    command: powershell

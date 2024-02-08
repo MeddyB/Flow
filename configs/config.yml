@@ -1,0 +1,58 @@
+name: "config-default"
+version: "Beta 0.0.1"
+root_template: "projects_dir"
+entities:
+  Project:
+    root_template: "project_root"
+  Asset:
+    root_template: "asset_root"
+    tasks:
+    - name: MDL
+      display_name: Modeling
+      work_root_template: asset_work_root
+      publish_root_template: asset_publish_root
+    - name: SHD
+      display_name: Shading
+      work_root_template: asset_work_root
+      publish_root_template: asset_publish_root
+    - name: RIG
+      display_name: Rigging
+      work_root_template: asset_work_root
+      publish_root_template: asset_publish_root
+    - name: LGT
+      display_name: Lighting
+      work_root_template: asset_work_root
+      publish_root_template: asset_publish_root
+  Season:
+    root_template: "season_root"
+  Episode:
+    root_template: "episode_root"
+  MasterShot:
+    root_template: "mastershot_root"
+    tasks:
+    - name: "ANIM"
+      work_root_template: mastershot_work_root
+      publish_root_template: mastershot_publish_root
+    - name: "LGT"
+      work_root_template: mastershot_work_root
+      publish_root_template: mastershot_publish_root
+  Sequence:
+    root_template: "sequence_root"
+  Shot:
+    root_template: "shot_root"
+    tasks:
+    - name: "ANIM"
+      work_root_template: shot_work_root
+      publish_root_template: shot_publish_root
+      renders_storage: shot_renders_storage
+      renders_root_template: shot_renders_root
+      renders_frames_template: shot_step_render_frames
+      renders_scene_template: shot_step_render_scene
+    - name: "LGT"
+      work_root_template: shot_work_root
+      publish_root_template: shot_publish_root
+      renders_storage: shot_renders_storage
+      renders_root_template: shot_renders_root
+      renders_frames_template: shot_step_render_frames
+      renders_scene_template: shot_step_render_scene
+

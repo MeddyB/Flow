@@ -1,0 +1,23 @@
+---
+DEV:
+  - meddy
+SUPERVISORS:
+  - ivan.martinez
+  - Alan.Teo
+ARTISTS:
+  - jules.bizarre
+  - yanis.bibiche
+DCC:
+  - $DEV
+  - $ARTISTS
+  - $SUPERVISORS
+Administration:
+  - $DEV
+  - $SUPERVISORS
+documentation:
+  - $DEV
+  - $ARTISTS
+  - $SUPERVISORS
+mayaPy:
+  - $DEV
+  - $SUPERVISORS
