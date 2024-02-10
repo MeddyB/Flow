@@ -126,6 +126,17 @@ class Config(object):
             context.create_step(step["name"])    
         return context
     
+    def list_contexts(self, path, recursive=False):
+        import pathlib
+        root = pathlib.Path(path)
+        root.rglob("*")
+        for path in root.rglob("*"):
+            if path.is_file():
+                if '.flw' in path.parts:
+                    index_big = str(path).split('.flw')
+                    path = index_big[0]
+                    yield os.path.dirname(path)
+            
     def get_context(self, path):
         from ..context import Context
         return Context(self, path)

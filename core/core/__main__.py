@@ -3,6 +3,9 @@ import os
 import getpass
 import json
 
+from core.logging.logger import init_logging, logging
+init_logging()
+log = logging.getLogger(__name__)
 
 def start_ui():
     from Qt5 import QtWidgets, QtCore, QtGui
@@ -39,6 +42,7 @@ def start_ui():
     
 
 def main():
+    log.setLevel(logging.INFO)
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="action")
     context_parser = subparsers.add_parser("context")
@@ -76,18 +80,18 @@ def main():
     from core.config import Config
     config = Config.get_instance()
     
-    from pprint import pprint
-    for entity in config._entities:
-        print('*'*50)
-        print('entity -->')
-        pprint(entity)
-        print('tasks -->')
-        pprint(config._entities[entity].tasks)
-        print('root_template -->')
-        pprint(config._entities[entity].root_template)
-        print('entity_type -->')
-        pprint(config._entities[entity].entity_type)
-        print('*'*50)
+    # from pprint import pprint
+    # for entity in config._entities:
+    #     print('*'*50)
+    #     print('entity -->')
+    #     pprint(entity)
+    #     print('tasks -->')
+    #     pprint(config._entities[entity].tasks)
+    #     print('root_template -->')
+    #     pprint(config._entities[entity].root_template)
+    #     print('entity_type -->')
+    #     pprint(config._entities[entity].entity_type)
+    #     print('*'*50)
     
     if args.action is None:
         #Launch Application 'Flow' by default
@@ -98,24 +102,19 @@ def main():
         if args.context_action == "create":
             properties = dict(args.property or [])
             context = config.create_context(args.entity_type, args.entity_name, args.path, properties=properties)
-            print("Creating step {}".format(context))     
+            logging.info("Creating context {}".format(context))
         elif args.context_action == "create_step":
             context = config.get_context(args.path)
             context.create_step(args.name)
-            print("Creating step {}".format(context))
+            logging.info("Context list :")
         elif args.context_action == "list":
-            import pathlib
-            root = pathlib.Path(args.path)
-            root.rglob("*")
-            for path in root.rglob("*"):
-                if path.is_file():
-                    if '.flw' in path.parts:
-                        index_big = str(path).split('.flw')
-                        path = index_big[0]
-                        print("path : {}".format(path))                               
+            contexts = config.list_contexts(args.path, recursive=True)
+            logging.info("Context list :")
+            for context in contexts:
+                logging.info(context)                            
         elif args.context_action == "get":
             from .context import Context
-            print("Get Fields from path: compare path with template config -> get fields")
+            logging.info("Get Fields from path :")
             context = Context(config, args.path)
             print(json.dumps(context.fields, indent=2, sort_keys=True))
                     
