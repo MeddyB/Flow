@@ -77,19 +77,15 @@ def main():
     config = Config.get_instance()
     
     from pprint import pprint
-    # pprint(config.name)
-    
     for entity in config._entities:
         print('*'*50)
         print('entity -->')
         pprint(entity)
-        print('config._entities[entity] -->')
+        print('tasks -->')
         pprint(config._entities[entity].tasks)
-        print('config._entities[entity].root_template -->')
+        print('root_template -->')
         pprint(config._entities[entity].root_template)
-        # print('config._entities[entity].config -->')
-        # pprint(config._entities[entity].config)
-        print('config._entities[entity].entity_type -->')
+        print('entity_type -->')
         pprint(config._entities[entity].entity_type)
         print('*'*50)
     
@@ -102,14 +98,12 @@ def main():
         if args.context_action == "create":
             properties = dict(args.property or [])
             context = config.create_context(args.entity_type, args.entity_name, args.path, properties=properties)
-            print("Creating step {}".format(context))  
-               
+            print("Creating step {}".format(context))     
         elif args.context_action == "create_step":
             context = config.get_context(args.path)
             context.create_step(args.name)
             print("Creating step {}".format(context))
-            
-        elif args.context_action == "list": 
+        elif args.context_action == "list":
             import pathlib
             root = pathlib.Path(args.path)
             root.rglob("*")
@@ -118,14 +112,14 @@ def main():
                     if '.flw' in path.parts:
                         index_big = str(path).split('.flw')
                         path = index_big[0]
-                        print("path : {}".format(path))
-                                          
+                        print("path : {}".format(path))                               
         elif args.context_action == "get":
             from .context import Context
+            print("Get Fields from path: compare path with template config -> get fields")
             context = Context(config, args.path)
             print(json.dumps(context.fields, indent=2, sort_keys=True))
                     
-    elif args.action == "software": 
+    elif args.action == "software":
         if args.software_action == "list":
             print("Softwares list :")
         elif args.software_action == "launch":
@@ -133,7 +127,6 @@ def main():
                
     elif args.action == "action":
         print("Engine list actions:")
-
-         
+    
 if __name__ == "__main__":
     main()

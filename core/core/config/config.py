@@ -5,9 +5,6 @@ import json
 import os
 from ..template import Templates
 
-
-from pprint import pprint
-
 class EntityConfig(object):
 
     def __init__(self, config, entity_type, root_template, tasks):
@@ -111,7 +108,6 @@ class Config(object):
         
         fields = template.parse(path)
         fields_entity = fields[entity_type]
-        
         for key, fields_value in fields_entity.items():
             if key in entity:
                 if fields_value != entity[key]:
@@ -123,14 +119,11 @@ class Config(object):
         if os.path.exists(properties_dir):
             raise Exception("Cannot create entity {entity_type} {entity_name}. Entity already exists at \"{properties_dir}\".".format(**locals()))
         os.makedirs(properties_dir)
-        
         with open(os.path.join(properties_dir, "properties.json"), "w") as f:
             json.dump(entity, f, indent=2, sort_keys=True)
         context = self.get_context(root_path)
-        
         for step in self._entities[entity_type].tasks.values():
-            context.create_step(step["name"])
-            
+            context.create_step(step["name"])    
         return context
     
     def get_context(self, path):
