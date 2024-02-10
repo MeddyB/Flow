@@ -1,0 +1,5 @@
+engine_handler: "core.engine.desktop:DesktopEngine"
+tools:
+  - name: Test
+    tool_handler: "Test handler"
+    settings: {}

@@ -22,6 +22,8 @@ def main():
     os.environ["FLOW_CURRENT_PROJECT"] = os.path.join(os.environ["FLOW_PROJECTS_DIR"], PROJECT)
     os.chdir(os.environ["FLOW_CURRENT_PROJECT"])
     
+    os.environ["FLOW_ENGINE_PATH"] = os.path.join(os.environ["FLOW_CONFIG_LOCATION"], "engines", "desktop_engine.yml")
+
     # for element in os.environ:
     #     print(element, os.environ[element])
     

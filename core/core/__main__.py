@@ -129,7 +129,10 @@ def main():
             sys.exit(exit_code)
 
     elif args.action == "action":
-        print("Engine list actions:")
+        
+        from .engine import load_engine
+        engine = load_engine()
+        print(engine)
     
 if __name__ == "__main__":
     main()

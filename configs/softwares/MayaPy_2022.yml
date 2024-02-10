@@ -13,6 +13,7 @@ environment:
   FLEXLM_TIMEOUT: 3000000
   MAYA_DISABLE_OPENCL: 1
   XBMLANGPATH: "${MAYA_COMPONENT_NODES_LOCATION}/icons"
+  FLOW_ENGINE_PATH: "${FLOW_CONFIG_LOCATION}/engines/maya_engine.yml"
 tasks:
   - name: Launch MayaPy 2022
     raw:
